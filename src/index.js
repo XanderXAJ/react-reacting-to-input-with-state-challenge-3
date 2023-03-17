@@ -31,14 +31,31 @@ function setIsEditing(value) {
 }
 
 function updateDOM() {
+  const showInputs = isEditing;
+  const showText = !isEditing;
+
   if (isEditing) {
     editButton.textContent = 'Save Profile';
-    // TODO: show inputs, hide content
   } else {
     editButton.textContent = 'Edit Profile';
-    // TODO: hide inputs, show content
   }
-  // TODO: update text labels
+
+  display(firstNameInput, showInputs)
+  display(lastNameInput, showInputs)
+  display(firstNameText, showText)
+  display(lastNameText, showText)
+
+  helloText.textContent = `Hello, ${firstName} ${lastName}!`
+  firstNameText.textContent = firstName
+  lastNameText.textContent = lastName
+}
+
+function display(el, visible) {
+  if (visible) {
+    show(el)
+  } else {
+    hide(el)
+  }
 }
 
 function hide(el) {
@@ -59,3 +76,4 @@ let helloText = document.getElementById('helloText');
 form.onsubmit = handleFormSubmit;
 firstNameInput.oninput = handleFirstNameChange;
 lastNameInput.oninput = handleLastNameChange;
+updateDOM();
